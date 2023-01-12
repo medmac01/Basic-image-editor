@@ -15,10 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QDoubleSpinBox, QHBoxLayout,
-    QLabel, QLineEdit, QPushButton, QSizePolicy,
-    QSlider, QSpacerItem, QSpinBox, QTabWidget,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDoubleSpinBox,
+    QHBoxLayout, QLabel, QLineEdit, QPushButton,
+    QSizePolicy, QSlider, QSpacerItem, QSpinBox,
+    QTabWidget, QVBoxLayout, QWidget)
 
 class Ui_ImageEditor(object):
     def setupUi(self, ImageEditor):
@@ -113,6 +113,7 @@ class Ui_ImageEditor(object):
         self.org1 = QLabel(self.widget_3)
         self.org1.setObjectName(u"org1")
         self.org1.setMinimumSize(QSize(241, 211))
+        self.org1.setMaximumSize(QSize(257, 211))
 
         self.verticalLayout_5.addWidget(self.org1)
 
@@ -141,6 +142,7 @@ class Ui_ImageEditor(object):
         self.fin1 = QLabel(self.widget_4)
         self.fin1.setObjectName(u"fin1")
         self.fin1.setMinimumSize(QSize(241, 211))
+        self.fin1.setMaximumSize(QSize(247, 211))
 
         self.verticalLayout_4.addWidget(self.fin1)
 
@@ -206,6 +208,11 @@ class Ui_ImageEditor(object):
 
         self.verticalLayout_3.addLayout(self.horizontalLayout_10)
 
+        self.binary = QCheckBox(self.filter)
+        self.binary.setObjectName(u"binary")
+
+        self.verticalLayout_3.addWidget(self.binary)
+
         self.horizontalLayout_12 = QHBoxLayout()
         self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
         self.verticalLayout_2 = QVBoxLayout()
@@ -222,6 +229,7 @@ class Ui_ImageEditor(object):
         self.org2.setObjectName(u"org2")
         self.org2.setGeometry(QRect(10, 5, 241, 211))
         self.org2.setMinimumSize(QSize(241, 211))
+        self.org2.setMaximumSize(QSize(241, 211))
 
         self.verticalLayout_2.addWidget(self.widget_5)
 
@@ -251,6 +259,7 @@ class Ui_ImageEditor(object):
         sizePolicy.setHeightForWidth(self.fin2.sizePolicy().hasHeightForWidth())
         self.fin2.setSizePolicy(sizePolicy)
         self.fin2.setMinimumSize(QSize(241, 211))
+        self.fin2.setMaximumSize(QSize(241, 211))
 
         self.verticalLayout.addWidget(self.widget_6)
 
@@ -330,6 +339,7 @@ class Ui_ImageEditor(object):
         self.org4 = QLabel(self.widget_7)
         self.org4.setObjectName(u"org4")
         self.org4.setMinimumSize(QSize(241, 211))
+        self.org4.setMaximumSize(QSize(241, 211))
 
         self.verticalLayout_12.addWidget(self.org4)
 
@@ -357,6 +367,7 @@ class Ui_ImageEditor(object):
         self.fin4 = QLabel(self.widget_8)
         self.fin4.setObjectName(u"fin4")
         self.fin4.setMinimumSize(QSize(241, 211))
+        self.fin4.setMaximumSize(QSize(241, 211))
 
         self.verticalLayout_11.addWidget(self.fin4)
 
@@ -438,6 +449,7 @@ class Ui_ImageEditor(object):
         self.org3 = QLabel(self.widget)
         self.org3.setObjectName(u"org3")
         self.org3.setMinimumSize(QSize(241, 211))
+        self.org3.setMaximumSize(QSize(241, 211))
 
         self.verticalLayout_18.addWidget(self.org3)
 
@@ -465,6 +477,7 @@ class Ui_ImageEditor(object):
         self.fin3 = QLabel(self.widget_2)
         self.fin3.setObjectName(u"fin3")
         self.fin3.setMinimumSize(QSize(241, 211))
+        self.fin3.setMaximumSize(QSize(241, 211))
 
         self.verticalLayout_17.addWidget(self.fin3)
 
@@ -490,7 +503,7 @@ class Ui_ImageEditor(object):
 
         self.retranslateUi(ImageEditor)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(ImageEditor)
@@ -520,6 +533,7 @@ class Ui_ImageEditor(object):
         self.comboBox_2.setItemText(3, QCoreApplication.translate("ImageEditor", u"Prewitt", None))
 
         self.label_16.setText(QCoreApplication.translate("ImageEditor", u"Iterations", None))
+        self.binary.setText(QCoreApplication.translate("ImageEditor", u"Avec binarisation", None))
         self.label_7.setText(QCoreApplication.translate("ImageEditor", u"Image Originale", None))
         self.org2.setText(QCoreApplication.translate("ImageEditor", u"TextLabel", None))
         self.label_8.setText(QCoreApplication.translate("ImageEditor", u"Image Finale", None))

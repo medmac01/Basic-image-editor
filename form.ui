@@ -46,7 +46,7 @@
         </size>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="basic">
         <attribute name="title">
@@ -159,6 +159,12 @@
                       <height>211</height>
                      </size>
                     </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>257</width>
+                      <height>211</height>
+                     </size>
+                    </property>
                     <property name="text">
                      <string>TextLabel</string>
                     </property>
@@ -205,6 +211,12 @@
                     <property name="minimumSize">
                      <size>
                       <width>241</width>
+                      <height>211</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>247</width>
                       <height>211</height>
                      </size>
                     </property>
@@ -298,6 +310,13 @@
             </layout>
            </item>
            <item>
+            <widget class="QCheckBox" name="binary">
+             <property name="text">
+              <string>Avec binarisation</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <layout class="QHBoxLayout" name="horizontalLayout_12">
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -326,6 +345,12 @@
                    </rect>
                   </property>
                   <property name="minimumSize">
+                   <size>
+                    <width>241</width>
+                    <height>211</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
                    <size>
                     <width>241</width>
                     <height>211</height>
@@ -385,6 +410,12 @@
                    </sizepolicy>
                   </property>
                   <property name="minimumSize">
+                   <size>
+                    <width>241</width>
+                    <height>211</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
                    <size>
                     <width>241</width>
                     <height>211</height>
@@ -504,6 +535,12 @@
                       <height>211</height>
                      </size>
                     </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>241</width>
+                      <height>211</height>
+                     </size>
+                    </property>
                     <property name="text">
                      <string>TextLabel</string>
                     </property>
@@ -542,6 +579,12 @@
                   <item>
                    <widget class="QLabel" name="fin4">
                     <property name="minimumSize">
+                     <size>
+                      <width>241</width>
+                      <height>211</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
                      <size>
                       <width>241</width>
                       <height>211</height>
@@ -655,6 +698,12 @@
                       <height>211</height>
                      </size>
                     </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>241</width>
+                      <height>211</height>
+                     </size>
+                    </property>
                     <property name="text">
                      <string>TextLabel</string>
                     </property>
@@ -693,6 +742,12 @@
                   <item>
                    <widget class="QLabel" name="fin3">
                     <property name="minimumSize">
+                     <size>
+                      <width>241</width>
+                      <height>211</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
                      <size>
                       <width>241</width>
                       <height>211</height>

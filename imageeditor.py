@@ -2,6 +2,7 @@
 import sys
 import cv2
 import numpy as np
+import scipy.signal as sig
 
 from PySide6.QtWidgets import QApplication, QWidget, QFileDialog
 from PySide6.QtGui import QPixmap, QImage
@@ -25,8 +26,12 @@ class ImageEditor(QWidget, myform_ui.Ui_ImageEditor):
 
         self.paramsvalues.valueChanged.connect(self.update_transform_func)
         self.iterations.valueChanged.connect(self.update_morph_func)
+        self.iterations_2.valueChanged.connect(self.update_filter_func)
 
         self.threshold.valueChanged.connect(self.update_hough_func)
+        self.binary.stateChanged.connect(self.update_filter_func)
+        self.label_17.setVisible(False)
+        self.paramsvalues.setVisible(False)
 
     def browse(self):
         options = QFileDialog.Options()
@@ -91,6 +96,34 @@ class ImageEditor(QWidget, myform_ui.Ui_ImageEditor):
                 imgFiltered[i,j] = tmp
 
         return imgFiltered
+
+    def sobel(self,img,k,thresh):
+        img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+        img_sobel = cv2.Sobel(img,cv2.CV_64F,0,1,ksize=k)
+        _, img_sobel_th = cv2.threshold(img_sobel,250,255,cv2.THRESH_BINARY)
+        if(thresh):
+            cv2.imwrite('sobel.jpeg',img_sobel_th)
+            return img_sobel_th
+        else:
+            cv2.imwrite('sobel.jpeg',img_sobel)
+            return img_sobel
+
+    def prewitt(self,img):
+        print(img.shape)
+        img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+        _, img_th = cv2.threshold(img,180,255,cv2.THRESH_BINARY)
+        filter = np.array([[-1, -1, -1], [0, 0, 0], [1, 1, 1]])
+
+        img_cx = sig.convolve2d(img_th,filter)
+        img_cy = sig.convolve2d(img_th,np.transpose(filter))
+
+        gradient_magnitude = np.sqrt(np.square(img_cx) + np.square(img_cy))
+
+        gradient_magnitude *= 255.0 / gradient_magnitude.max()
+
+        cv2.imwrite('prewitt.jpeg',gradient_magnitude)
+        return gradient_magnitude
+
 
     def load_img_binarized(self,img,threshold=(150,255)):
         img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -177,6 +210,7 @@ class ImageEditor(QWidget, myform_ui.Ui_ImageEditor):
             img = self.load_image(self.imgPath.text())
 
             beta = self.paramsvalues.value()
+
             tran_img = np.uint8(255*(1-(1-(img/255))**beta))
 
             height, width, channels = tran_img.shape
@@ -208,7 +242,7 @@ class ImageEditor(QWidget, myform_ui.Ui_ImageEditor):
     def update_filter_func(self):
         if self.comboBox_2.currentText() == "Moyenne":
 
-            img = self.filtreMoy(self.load_image(self.imgPath.text()),2)
+            img = self.filtreMoy(self.load_image(self.imgPath.text()),self.iterations_2.value())
 
             height, width = img.shape
             bytes_per_line = 1 * width
@@ -219,11 +253,35 @@ class ImageEditor(QWidget, myform_ui.Ui_ImageEditor):
             self.fin2.setPixmap(pixmap)
 
         if self.comboBox_2.currentText() == "Median":
-            img = self.filtreMedian(self.load_image(self.imgPath.text()),2)
+            img = self.filtreMedian(self.load_image(self.imgPath.text()),self.iterations_2.value())
 
             height, width = img.shape
             bytes_per_line = 1 * width
             q_image = QImage(img.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
+
+            pixmap = QPixmap.fromImage(q_image)
+            self.fin2.setScaledContents(True)
+            self.fin2.setPixmap(pixmap)
+
+        if self.comboBox_2.currentText() == "Sobel":
+            img = self.sobel(self.load_image(self.imgPath.text()),self.iterations_2.value(),self.binary.isChecked())
+
+            img = self.load_image('sobel.jpeg')
+            height, width, channels = img.shape
+            bytes_per_line = 3 * width
+            q_image = QImage(img.data, width, height, bytes_per_line, QImage.Format_RGB888)
+
+            pixmap = QPixmap.fromImage(q_image)
+            self.fin2.setScaledContents(True)
+            self.fin2.setPixmap(pixmap)
+
+        if self.comboBox_2.currentText() == "Prewitt":
+            img = self.prewitt(self.load_image(self.imgPath.text()))
+
+            img = self.load_image('prewitt.jpeg')
+            height, width, channels = img.shape
+            bytes_per_line = 3 * width
+            q_image = QImage(img.data, width, height, bytes_per_line, QImage.Format_RGB888)
 
             pixmap = QPixmap.fromImage(q_image)
             self.fin2.setScaledContents(True)
